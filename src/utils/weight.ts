@@ -3,8 +3,8 @@ const correctionFactors: any = {
   'KILOGRAMS': 1,
   'GRAMS': 1,
   'POUNDS': 1000,
-  'TONNE': 1,
-  'TON': 1,
+  'TONNES': 1,
+  'TONS': 1,
 };
 
 
@@ -13,8 +13,8 @@ const conversionFactors: any = {
   'KILOGRAMS': 1000,
   'GRAMS': 1,
   'POUNDS': 453592,
-  'TONNE': 1000000,
-  'TON': 907185,
+  'TONNES': 1000000,
+  'TONS': 907185,
 };
 
 export const convertWeight = (weight: number, unitFrom: string, unitTo: string): number => {
