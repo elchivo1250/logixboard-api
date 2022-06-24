@@ -36,6 +36,9 @@ Get the aggregated weight of all existing shipments, converting to the specified
 - TONS
 - TONNES
 
+## Notes
+I chose to use the more basic `mysql2` database driver instead of an ORM for this project. I'll know whether that was a good decision after I investigate available Typescript-compatible ORMs and test them out on my own time. Since I'm only passingly familiar with Typescript, I didn't want to add more unfamiliar things that could potentially trip me up and lead me down a long, sad rabbit-hole. This led to the model code being more verbose than it probably should be. I also attempted to add transactions to some of the more involved operations to make the shipment creation/update endpoint more fault tolerant, but it was hanging for a reason I didn't have time to troubleshoot. 
+
 # Original Prompt
 
 # Logixboard Backend Engineering Take-Home Challenge
