@@ -1,60 +1,36 @@
-import { QueryError, ObjectResult, BooleanResult, DatabaseModel } from './databaseModel';
+import { DataTypes, Model, Optional } from 'sequelize';
+import { Shipment } from './shipment';
+import { connection } from '../db';
 
-export const TABLE_NAME = 'organization';
-export type OrganizationResult = Organization | QueryError;
-
-export interface IOrganization {
+export interface OrganizationAttributes {
   id: string;
   code: string;
+  shipments?: Shipment[];
 }
 
-export class Organization {
-  id: string;
-  code: string;
+export interface OrganizationInput extends Optional<OrganizationAttributes, 'id'> {}
+export interface OrganizationOutput extends Required<OrganizationAttributes> {}
 
-  constructor({ id, code }: IOrganization) {
-    this.id = id;
-    this.code = code;
-  }
 
-  static async create({ id, code }: { id: string, code: string }): Promise<OrganizationResult> {
-    const query: string = `INSERT INTO \`${TABLE_NAME}\` (\`id\`, \`code\`) VALUES (?, ?)`;
-    const params: string[] = [id, code];
+export class Organization extends Model<OrganizationAttributes, OrganizationInput> implements OrganizationAttributes {
+  public id!: string;
+  public code!: string;
+  public shipments?: Shipment[];
 
-    const result: BooleanResult = await DatabaseModel.booleanQuery({ query, params });
-
-    return result instanceof QueryError ? result : new Organization({ id, code });
-  }
-
-  static async update({ id, code }: { id: string, code: string }): Promise<OrganizationResult> {
-    const query: string = `UPDATE \`${TABLE_NAME}\` SET \`code\` = ? WHERE id = ?`;
-    const params: string[] = [code, id];
-
-    const result: BooleanResult = await DatabaseModel.booleanQuery({ query, params });
-
-    return result instanceof QueryError ? result : new Organization({ id, code });
-  }
-
-  static async upsert({ id, code }: { id: string, code: string }): Promise<OrganizationResult> {
-    const query: string = `INSERT INTO \`${TABLE_NAME}\` (\`id\`, \`code\`) VALUES (?, ?) ON DUPLICATE KEY UPDATE \`code\` = ?`;
-    const params: string[] = [id, code, code];
-
-    const result: BooleanResult = await DatabaseModel.booleanQuery({ query, params });
-
-    return result instanceof QueryError ? result : new Organization({ id, code });
-  }
-
-  static async get(id: string): Promise<OrganizationResult> {
-    const query: string = `SELECT * FROM \`${TABLE_NAME}\` WHERE id = ?`;
-    const params: string[] = [id];
-
-    const result: ObjectResult = await DatabaseModel.objectQuery({ query, params });
-
-    if (result instanceof QueryError) {
-      return result as QueryError;
-    }
-
-    return result.length === 0 ? new QueryError('Organization not found') : new Organization(result[0] as IOrganization);
-  }
-
+  public readonly createdAt!: Date;
+  public readonly updatedAt!: Date;
 }
+
+Organization.init({
+  id: {
+    type: DataTypes.STRING,
+    primaryKey: true,
+  },
+  code: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+}, {
+  timestamps: true,
+  sequelize: connection,
+});
