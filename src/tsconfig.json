@@ -15,5 +15,5 @@
         "sourceMap": true,
         "strictNullChecks": true,
         "target": "ES2018"
-    },
+    }
 }
