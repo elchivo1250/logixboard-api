@@ -17,7 +17,7 @@ async function main() {
     }
 
     try {
-        const res = await axios.get(`http://localhost:3000/shipments/aggregate-weight/GRAMS`);
+        const res = await axios.get(`http://localhost:3000/shipments/aggregate-weight/POUNDS`);
         console.log(res.data);
     } catch (error) {
         console.error(error.code)
