@@ -17,8 +17,22 @@ async function main() {
     }
 
     try {
+        const res = await axios.get(`http://localhost:3000/shipments/S00001197`);
+        console.log(JSON.stringify(res.data));
+    } catch (error) {
+        console.error(error.code)
+    }
+
+    try {
+        const res = await axios.get(`http://localhost:3000/organizations/34f195b5-2aa1-4914-85ab-f8849f9b541a`);
+        console.log(JSON.stringify(res.data));
+    } catch (error) {
+        console.error(error.code)
+    }
+
+    try {
         const res = await axios.get(`http://localhost:3000/shipments/aggregate-weight/POUNDS`);
-        console.log(res.data);
+        console.log(JSON.stringify(res.data));
     } catch (error) {
         console.error(error.code)
     }

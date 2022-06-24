@@ -127,7 +127,7 @@ app.get('/shipments/:shipmentId', async (req: any, res: any) => {
   
   try {
     result = await ShipmentRepository.getById(req.params.shipmentId, {
-      include: ['Organizations']
+      include: ['Organizations', 'ShipmentNodes']
     });
   } catch (err: any) {
     console.log(JSON.stringify(err));
@@ -142,7 +142,10 @@ app.get('/shipments/:shipmentId', async (req: any, res: any) => {
 
   }
 
-  res.json(result as Shipment);
+  res.json({
+    statusCode: 200,
+    data: result as Shipment,
+  });
 });
 
 app.get('/organizations/:organizationId', async (req: any, res: any) => {
