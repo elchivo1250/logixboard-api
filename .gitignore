@@ -1,0 +1,3 @@
+.build/
+node_modules/
+.devcontainer/db-secrets.env
