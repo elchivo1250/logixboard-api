@@ -1,0 +1,21 @@
+{
+	"name": "Logixboard Interview",
+	"build": {
+		"context": ".",
+		"dockerfile": "Dockerfile",
+		"args": { 
+			"VARIANT": "16-bullseye"
+		}
+	},
+	"settings": {},
+	"extensions": [
+		"dbaeumer.vscode-eslint"
+	],
+	"runArgs": [
+			"--network=devcontainer_logixboard",
+			"--env-file=.devcontainer/db-secrets.env",
+			"--env-file=.devcontainer/db-config.env"
+	],
+	"forwardPorts": ["3000:3000"],
+	"remoteUser": "node"
+}
