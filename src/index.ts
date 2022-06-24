@@ -190,7 +190,7 @@ app.get('/shipments/aggregate-weight/:unit', async (req: any, res: any) => {
     return;
   }
 
-  let result: ShipmentNode;
+  let result: ShipmentNodeOutput;
 
   try {
     result = await ShipmentNodeRepository.getAggregateWeight(req.params.unit);
@@ -206,7 +206,7 @@ app.get('/shipments/aggregate-weight/:unit', async (req: any, res: any) => {
 
   res.json({
     statusCode: 200,
-    data: result
+    data: result as ShipmentNode,
   });
 });
 

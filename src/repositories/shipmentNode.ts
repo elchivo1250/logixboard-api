@@ -25,9 +25,11 @@ repository.getAggregateWeight = async (unit: string): Promise<ShipmentNodeOutput
   });
 
   return shipmentNodes.reduce((prev: ShipmentNodeOutput, curr: ShipmentNodeOutput) => {
+    const { id, weight, unit } = prev;
     return {
-      ...prev,
-      weight: prev.weight + convertWeight(curr.weight, curr.unit, unit),
+      id, 
+      unit,
+      weight: weight + convertWeight(curr.weight, curr.unit, unit),
     }
   }, new ShipmentNode({ id: 0, weight: 0, unit}))
 };
