@@ -1,3 +1,43 @@
+# Submission Information
+
+## Installation & Testing
+
+1. In a bash shell, create a database secrets file with the following command: `cp ./.devcontainer/db-secrets.env.dist ./.devcontainer/db-secrets.env`
+1. Fill in the values in `./.devcontainer/db-secrets.env.dist`
+1. Start the database container: `cd .devcontainer && docker-compose up -d`
+1. Open the root folder in VS code in a container. The container will build upon open. 
+1. Once in the container bash shell, install npm packages: `cd src; npm install`
+1. Start the Express server: `npm start &`
+1. Run the send-events script: `npm run send`
+1. Run tests: `npx jest`
+
+## Available Routes
+
+### POST /shipment
+Create or update a shipment
+
+### POST /organization
+Create or update an organization
+
+### GET /shipments/:shipmentId
+Get a shipment by its reference ID
+
+### GET /organizations/:organizationId
+Get an organization by its ID
+
+### GET /shipments/aggregate-weight/:unit
+Get the aggregated weight of all existing shipments, converting to the specified units
+
+#### Available Unit values
+- GRAMS
+- KILOGRAMS
+- POUNDS
+- OUNCES
+- TONS
+- TONNES
+
+# Original Prompt
+
 # Logixboard Backend Engineering Take-Home Challenge
 
 Thanks for applying to Logixboard! The next step in our process is a coding challenge. Our goals
