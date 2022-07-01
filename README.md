@@ -3,7 +3,7 @@
 ## Installation & Testing
 
 1. In a bash shell, create a database secrets file with the following command: `cp ./.devcontainer/db-secrets.env.dist ./.devcontainer/db-secrets.env`
-1. Fill in the values in `./.devcontainer/db-secrets.env.dist`
+1. Fill in the values in `./.devcontainer/db-secrets.env`
 1. Start the database container: `cd .devcontainer && docker-compose up -d`
 1. Open the root folder in VS code in a container. The container will build upon open. 
 1. Once in the container bash shell, install npm packages: `cd src; npm install`
